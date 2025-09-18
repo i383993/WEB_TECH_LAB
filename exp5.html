@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Organic Chemical Supplies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h3 {
+            text-align: center;
+            color: #0056b3;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect total width */
+        }
+        .price-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Organic Chemical Order Form</h3>
+        
+        <label for="chemical">Select Chemical:</label>
+        <select id="chemical" onchange="updateTotal()">
+            <option value="benzene">Benzene ($50/L)</option>
+            <option value="ethanol">Ethanol ($25/L)</option>
+            <option value="acetone">Acetone ($30/L)</option>
+            <option value="glycerol">Glycerol ($40/L)</option>
+        </select>
+
+        <label for="quantity">Quantity (Liters):</label>
+        <input type="number" id="quantity" min="1" oninput="updateTotal()">
+        
+        <div id="total-price" class="price-display">Total Price: $0.00</div>
+        
+        <button onclick="addToCart()">Add to Cart</button>
+        
+        <div id="status-message" class="message"></div>
+    </div>
+
+    <script>
+        // Define prices for each chemical
+        const chemicalPrices = {
+            'benzene': 50,
+            'ethanol': 25,
+            'acetone': 30,
+            'glycerol': 40
+        };
+
+        // Function to update the total price in real-time
+        function updateTotal() {
+            const chemical = document.getElementById('chemical').value;
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const priceDisplay = document.getElementById('total-price');
+
+            if (isNaN(quantity) || quantity <= 0) {
+                priceDisplay.textContent = "Total Price: $0.00";
+            } else {
+                const price = chemicalPrices[chemical];
+                const total = quantity * price;
+                priceDisplay.textContent = `Total Price: $${total.toFixed(2)}`;
+            }
+        }
+
+        // Function to handle adding the item to a "cart"
+        function addToCart() {
+            const chemicalSelect = document.getElementById('chemical');
+            const chemicalName = chemicalSelect.options[chemicalSelect.selectedIndex].text.split(' ')[0];
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const statusMessage = document.getElementById('status-message');
+
+            if (isNaN(quantity) || quantity <= 0) {
+                statusMessage.textContent = "Please enter a valid quantity.";
+                statusMessage.style.color = "red";
+            } else {
+                statusMessage.textContent = `${quantity}L of ${chemicalName} has been added to your order!`;
+                statusMessage.style.color = "green";
+          
+            }
+        }
+    </script>
+</body>
+</html>
