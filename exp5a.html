@@ -1,128 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Organic Chemical Supplies</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Mass Index (BMI)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
-            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e6f7ff;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            background: #fff;
+            background-color: #007bb5;
+            color: white;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 380px;
         }
-        h3 {
+        .header {
             text-align: center;
-            color: #0056b3;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        select, input[type="number"] {
-            width: 100%;
-            padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding doesn't affect total width */
         }
-        .price-display {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #28a745;
-            margin-top: 10px;
+        h2 {
+            margin: 0;
+            font-size: 1.8em;
         }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: #fff;
+        p {
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .separator {
+            border: 0;
+            height: 1px;
+            background-color: #005f99;
+            margin: 20px 0;
+        }
+        .input-section {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            flex: 1;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        .input-group input {
+            flex: 2;
+            padding: 10px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
+            text-align: right;
             font-size: 1em;
-            transition: background-color 0.3s ease;
+            background-color: #f0f8ff;
+            color: #333;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            margin-top: 15px;
-            text-align: center;
+        .input-group span {
+            margin-left: 10px;
             font-weight: bold;
+            font-size: 1.1em;
+        }
+        .result-section {
+            background-color: #006b99;
+            padding: 25px 20px;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #bmi-value {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin: 0;
+        }
+        #bmi-status {
+            font-size: 1.5em;
+            font-weight: 500;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h3>Organic Chemical Order Form</h3>
+        <div class="header">
+            <h2>Body mass index (BMI)</h2>
+            <p>A measure of body fat in adults</p>
+        </div>
+        <hr class="separator">
         
-        <label for="chemical">Select Chemical:</label>
-        <select id="chemical" onchange="updateTotal()">
-            <option value="benzene">Benzene ($50/L)</option>
-            <option value="ethanol">Ethanol ($25/L)</option>
-            <option value="acetone">Acetone ($30/L)</option>
-            <option value="glycerol">Glycerol ($40/L)</option>
-        </select>
-
-        <label for="quantity">Quantity (Liters):</label>
-        <input type="number" id="quantity" min="1" oninput="updateTotal()">
+        <div class="input-section">
+            <div class="input-group">
+                <label for="weight">Weight</label>
+                <input type="number" id="weight" value="80" oninput="calculateBMI()">
+                <span>kg</span>
+            </div>
+            <div class="input-group">
+                <label for="height">Height</label>
+                <input type="number" id="height" value="170" oninput="calculateBMI()">
+                <span>cm</span>
+            </div>
+        </div>
         
-        <div id="total-price" class="price-display">Total Price: $0.00</div>
-        
-        <button onclick="addToCart()">Add to Cart</button>
-        
-        <div id="status-message" class="message"></div>
+        <div class="result-section">
+            <p id="bmi-value">27.7</p>
+            <p id="bmi-status">Overweight BMI</p>
+        </div>
     </div>
 
     <script>
-        // Define prices for each chemical
-        const chemicalPrices = {
-            'benzene': 50,
-            'ethanol': 25,
-            'acetone': 30,
-            'glycerol': 40
-        };
-
-        // Function to update the total price in real-time
-        function updateTotal() {
-            const chemical = document.getElementById('chemical').value;
-            const quantity = parseFloat(document.getElementById('quantity').value);
-            const priceDisplay = document.getElementById('total-price');
-
-            if (isNaN(quantity) || quantity <= 0) {
-                priceDisplay.textContent = "Total Price: $0.00";
-            } else {
-                const price = chemicalPrices[chemical];
-                const total = quantity * price;
-                priceDisplay.textContent = `Total Price: $${total.toFixed(2)}`;
+        function calculateBMI() {
+            // Get user input for weight in kilograms and height in centimeters
+            const weight = parseFloat(document.getElementById('weight').value);
+            const heightCm = parseFloat(document.getElementById('height').value);
+            
+            // Check for valid input
+            if (isNaN(weight) || isNaN(heightCm) || weight <= 0 || heightCm <= 0) {
+                document.getElementById('bmi-value').textContent = '0.0';
+                document.getElementById('bmi-status').textContent = 'Invalid Input';
+                return;
             }
+
+            // Convert height from cm to meters
+            const heightM = heightCm / 100;
+            
+            // Calculate BMI using the formula: BMI = weight / (height * height)
+            const bmi = weight / (heightM * heightM);
+            let status = '';
+
+            // Determine the BMI status based on the provided criteria
+            if (bmi < 18) {
+                status = 'Underweight';
+            } else if (bmi >= 18 && bmi < 25) {
+                status = 'Normal';
+            } else if (bmi >= 25 && bmi < 30) {
+                status = 'Overweight';
+            } else { // bmi >= 30
+                status = 'Obese';
+            }
+
+            // Display the results
+            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+            document.getElementById('bmi-status').textContent = status;
         }
 
-        // Function to handle adding the item to a "cart"
-        function addToCart() {
-            const chemicalSelect = document.getElementById('chemical');
-            const chemicalName = chemicalSelect.options[chemicalSelect.selectedIndex].text.split(' ')[0];
-            const quantity = parseFloat(document.getElementById('quantity').value);
-            const statusMessage = document.getElementById('status-message');
-
-            if (isNaN(quantity) || quantity <= 0) {
-                statusMessage.textContent = "Please enter a valid quantity.";
-                statusMessage.style.color = "red";
-            } else {
-                statusMessage.textContent = `${quantity}L of ${chemicalName} has been added to your order!`;
-                statusMessage.style.color = "green";
-          
-            }
-        }
+        // Call the function on page load to display the initial values
+        calculateBMI();
     </script>
 </body>
 </html>
