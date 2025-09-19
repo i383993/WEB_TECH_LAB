@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Calculator App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .app-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+        }
+        .header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 20px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .input-group {
+            margin-bottom: 25px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .input-group input[type="number"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .percentages-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        .percentages-container .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .percentages-container input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        #evaluateBtn {
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        #evaluateBtn:hover {
+            background-color: #0056b3;
+        }
+        .result-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        .result-box {
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+        .result-box h4 {
+            margin: 0 0 10px;
+        }
+        .result-box span {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        #roomRentBox { background-color: #007bff; }
+        #accessoriesBox { background-color: #28a745; }
+        #emergencyBox { background-color: #17a2b8; }
+        #savingBox { background-color: #dc3545; }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#evaluateBtn").click(function() {
+                let amount = parseFloat($("#amount").val());
+                let roomRent = parseFloat($("#roomRent").val());
+                let accessories = parseFloat($("#accessories").val());
+                let emergency = parseFloat($("#emergency").val());
+                let saving = parseFloat($("#saving").val());
+
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Please enter a valid amount.");
+                    return;
+                }
+
+                let totalPercentage = roomRent + accessories + emergency + saving;
+                if (totalPercentage !== 100) {
+                    alert("The total percentage must be exactly 100%. Please check your values.");
+                    return;
+                }
+
+                $("#roomRentResult").text(`Rs. ${(amount * roomRent / 100).toFixed(2)}`);
+                $("#accessoriesResult").text(`Rs. ${(amount * accessories / 100).toFixed(2)}`);
+                $("#emergencyResult").text(`Rs. ${(amount * emergency / 100).toFixed(2)}`);
+                $("#savingResult").text(`Rs. ${(amount * saving / 100).toFixed(2)}`);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h2>Budget Calculator App</h2>
+        </div>
+        
+        <div class="input-group">
+            <label>Enter Amount that you want to Manage</label>
+            <input type="number" id="amount" placeholder="e.g., 15000">
+        </div>
+        
+        <p>How would you like to divide your money?</p>
+        
+        <div class="percentages-container">
+            <div class="item">
+                <span>Room Rent(%)</span>
+                <input type="number" id="roomRent" value="35">
+            </div>
+            <div class="item">
+                <span>Accessories(%)</span>
+                <input type="number" id="accessories" value="15">
+            </div>
+            <div class="item">
+                <span>Emergency(%)</span>
+                <input type="number" id="emergency" value="20">
+            </div>
+            <div class="item">
+                <span>Saving(%)</span>
+                <input type="number" id="saving" value="30">
+            </div>
+        </div>
+        
+        <button id="evaluateBtn">Evaluate My Money</button>
+        
+        <div class="result-container">
+            <div class="result-box" id="roomRentBox">
+                <h4>Room Rent</h4>
+                <span id="roomRentResult">Rs.0.00</span>
+            </div>
+            <div class="result-box" id="accessoriesBox">
+                <h4>Accessories</h4>
+                <span id="accessoriesResult">Rs.0.00</span>
+            </div>
+            <div class="result-box" id="emergencyBox">
+                <h4>Emergency</h4>
+                <span id="emergencyResult">Rs.0.00</span>
+            </div>
+            <div class="result-box" id="savingBox">
+                <h4>Saving</h4>
+                <span id="savingResult">Rs.0.00</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
