@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - URK23CS1076</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f4f7;
+        }
+        .converter-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .converted-amount {
+            background-color: #eaf6ff;
+            color: #007bff;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter-container">
+        <h2>Currency Converter</h2>
+
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" value="1" oninput="convertCurrency()">
+        </div>
+
+        <div class="form-group">
+            <label for="from-currency">From:</label>
+            <select id="from-currency" onchange="convertCurrency()">
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="INR" selected>Indian Rupee (INR)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="to-currency">To:</label>
+            <select id="to-currency" onchange="convertCurrency()">
+                <option value="USD" selected>US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="INR">Indian Rupee (INR)</option>
+            </select>
+        </div>
+
+        <div class="converted-amount" id="converted-amount">
+            Converted Amount: 0.00 USD
+        </div>
+
+        <div class="footer">
+            23CS2049 – Web Technology Lab | URK23CS1076
+        </div>
+    </div>
+
+    <script>
+        const exchangeRates = {
+            'USD': { 'INR': 83.50, 'EUR': 0.92, 'JPY': 157.00 },
+            'INR': { 'USD': 0.012, 'EUR': 0.011, 'JPY': 1.88 },
+            'EUR': { 'USD': 1.08, 'INR': 90.76, 'JPY': 170.60 },
+            'JPY': { 'USD': 0.0064, 'INR': 0.53, 'EUR': 0.0059 }
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('from-currency').value;
+            const toCurrency = document.getElementById('to-currency').value;
+            const resultElement = document.getElementById('converted-amount');
+
+            if (isNaN(amount) || amount <= 0) {
+                resultElement.textContent = `Converted Amount: Invalid Amount`;
+                return;
+            }
+
+            if (fromCurrency === toCurrency) {
+                resultElement.textContent = `Converted Amount: ${amount.toFixed(2)} ${toCurrency}`;
+                return;
+            }
+
+            const rate = exchangeRates[fromCurrency][toCurrency];
+            const convertedValue = amount * rate;
+
+            resultElement.textContent = `Converted Amount: ${convertedValue.toFixed(2)} ${toCurrency}`;
+        }
+
+        convertCurrency();
+    </script>
+</body>
+</html>
