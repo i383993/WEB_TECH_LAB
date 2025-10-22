@@ -1,136 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organic Chemical Supplier</title>
     <style>
-        /* General Body and Container Styling */
         body {
+            background-color: #f0f8ff;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f0f8ff; /* Light blue/white background similar to the image */
-            color: #333;
-            text-align: center; /* Center the main content block */
         }
-        .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 0 auto;
+        header {
+            text-align: center;
+            background-color: #006400;
+            color: white;
             padding: 20px;
-            background-color: #fff; /* White content background */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Header and Navigation Styling */
-        .header {
-            background-color: #006400; /* Dark Green Header Background */
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 20px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .navbar a {
-            color: white;
+        nav a {
+            color: #ffeb3b;
             text-decoration: none;
             margin: 0 10px;
-            padding: 2px 5px;
-            border-right: 1px solid white;
         }
-        .navbar a:last-child {
-            border-right: none;
+        section {
+            padding: 30px;
         }
-        .navbar a:hover {
-            text-decoration: underline;
+        h2 {
+            color: #008080;
         }
-
-        /* Introduction Text Styling */
-        .intro-text {
-            text-align: left;
-            margin: 20px 0;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-        .intro-text p:first-child {
-            color: #006400; /* Green text for the first line */
-            font-weight: bold;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #a0522d; /* Sienna/Brown color for emphasis words */
-        }
-        .greener-tomorrow {
-            color: #a0522d; /* Sienna/Brown color for the "greener tomorrow" link */
-            font-weight: bold;
-            text-decoration: none;
+        label {
             display: block;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .greener-tomorrow:hover {
-            text-decoration: underline;
-        }
-
-        /* Image and Lists Styling */
-        .image-section h3 {
-            color: #333;
-        }
-        .image-section img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0 30px 0;
-            border: 1px solid #ccc; /* Simple border around the image */
-        }
-        .list-section h3 {
-            color: #800080; /* Purple color for list titles */
-        }
-        .list-section ol, .list-section ul {
-            text-align: left;
-            display: inline-block; /* Centers the list block */
-            list-style-position: inside;
-            margin: 10px auto 30px auto;
-        }
-
-        /* Form Styling (Login and Register) */
-        .form-section {
-            text-align: left;
-            padding: 20px 0;
-        }
-        .form-section h2 {
-            color: #000080; /* Dark Blue color for form titles */
-            font-size: 18px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 3px;
-            font-size: 13px;
-        }
-        .form-group input[type="text"], 
-        .form-group input[type="email"],
-        .form-group input[type="password"],
-        .form-group select {
-            width: 250px;
-            padding: 5px;
-            border: 1px solid #aaa;
-            box-sizing: border-box;
-        }
-        .radio-group label {
-            display: inline-block;
-            margin-right: 15px;
-        }
-        .register-submit {
-            margin-top: 15px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
+
+    <header>
+        <h1>Organic Chemical Supplier</h1>
+        <nav>
+            <a href="#home">Home</a> |
+            <a href="#media">Media</a> |
+            <a href="#login">Login</a> |
+            <a href="#register">Register</a>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <p style="text-align: center; font-size: 18px; color: #333333;">
+            <strong style="color: #008080;">At Organic Chemical Supplier</strong>, we provide high-quality, eco-friendly organic chemicals 
+            for laboratories, research centers, and industries.<br><br>
+            Our mission is to support <span style="color: #006400;">sustainable science</span> by offering safe and certified chemical products.<br>
+            Explore our range of <span style="color: #8b0000;">solvents</span>, <span style="color: #8b0000;">reagents</span>, and 
+            <span style="color: #8b0000;">specialty compounds</span> through our Media page.<br><br>
+            <span style="color: #00008b;">Join us in creating a greener tomorrow!</span>
+        </p>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media" style="text-align: center;">
+        <h2>Image of Our Lab</h2>
+        <img src="https://www.haltermann-carless.com/hubfs/Bilder/Blog/2020/logistrics_iStock_1100x620px_copyright_industryview-956344172_200928.jpg" 
+             alt="Lab image" width="400"><br><br>
+
+        <h2 style="color: #8b0000;">Top 3 Chemicals We Offer (Ordered List)</h2>
+        <ol style="font-size: 18px; text-align: left; display: inline-block;">
+            <li>Acetone</li>
+            <li>Benzene</li>
+            <li>Toluene</li>
+        </ol>
+
+        <h2 style="color: #00008b;">Features of Our Service (Unordered List)</h2>
+        <ul style="font-size: 18px; text-align: left; display: inline-block;">
+            <li>High Purity</li>
+            <li>Quick Delivery</li>
+            <li>Certified Safe Packaging</li>
+        </ul>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login">
+        <h2>Login to Organic Chemical Supplier</h2>
+        <form action="#" method="post">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="username">
+
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="password"><br><br>
+
+            <input type="submit" value="Login">
+        </form>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register">
+        <h2>Register to Organic Chemical Supplier</h2>
+        <form action="#" method="post">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname">
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <label for="confirm">Confirm Password:</label>
+            <input type="password" id="confirm" name="confirm">
+
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="male"> Male
+            <input type="radio" name="gender" value="female"> Female
+
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                <option>India</option>
+                <option>USA</option>
+                <option>UK</option>
+                <option>Other</option>
+            </select>
+
+            <br><br>
+            <label>
+                <input type="checkbox" name="terms">
+                I agree to the Terms & Conditions
+            </label><br><br>
+
+            <input type="submit" value="Register">
+        </form>
+    </section>
+
+</body>
+</html>
