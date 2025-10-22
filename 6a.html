@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #f0f8ff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      border: 1px solid #cce6ff;
+    }
+
+    h2 {
+      color: #007acc;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .result-box {
+      background-color: #e9f5e9;
+      border: 1px solid #c8e6c9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005f99;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#evaluateBtn").click(function() {
+        const amount = parseFloat($("#amount").val());
+        const rent = parseFloat($("#rent").val());
+        const accessories = parseFloat($("#accessories").val());
+        const emergency = parseFloat($("#emergency").val());
+        const saving = parseFloat($("#saving").val());
+
+        if (isNaN(amount) || amount <= 0) {
+          alert("Please enter a valid total amount!");
+          return;
+        }
+
+        const totalPercent = rent + accessories + emergency + saving;
+
+        if (totalPercent !== 100) {
+          alert("Total percentage must be equal to 100%. Please adjust your values.");
+          return;
+        }
+
+        const
