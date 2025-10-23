@@ -100,8 +100,65 @@
         const totalPercent = rent + accessories + emergency + saving;
 
         if (totalPercent !== 100) {
-          alert("Total percentage must be equal to 100%. Please adjust your values.");
+          alert("Total percentage must equal 100%. Please adjust your values.");
           return;
         }
 
-        const
+        // Calculate amounts
+        const rentAmt = (amount * rent) / 100;
+        const accessoriesAmt = (amount * accessories) / 100;
+        const emergencyAmt = (amount * emergency) / 100;
+        const savingAmt = (amount * saving) / 100;
+
+        // Display results
+        $("#rentResult").text("₹" + rentAmt.toFixed(2));
+        $("#accessoriesResult").text("₹" + accessoriesAmt.toFixed(2));
+        $("#emergencyResult").text("₹" + emergencyAmt.toFixed(2));
+        $("#savingResult").text("₹" + savingAmt.toFixed(2));
+
+        $(".result-box").show();
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>💰 Budget Calculator</h2>
+    <div class="form-group">
+      <label for="amount">Total Amount (₹):</label>
+      <input type="number" id="amount" placeholder="Enter total amount">
+    </div>
+
+    <div class="form-group">
+      <label>Rent (%):</label>
+      <input type="number" id="rent" placeholder="Enter rent %">
+    </div>
+
+    <div class="form-group">
+      <label>Accessories (%):</label>
+      <input type="number" id="accessories" placeholder="Enter accessories %">
+    </div>
+
+    <div class="form-group">
+      <label>Emergency (%):</label>
+      <input type="number" id="emergency" placeholder="Enter emergency %">
+    </div>
+
+    <div class="form-group">
+      <label>Savings (%):</label>
+      <input type="number" id="saving" placeholder="Enter savings %">
+    </div>
+
+    <button id="evaluateBtn">Calculate Budget</button>
+
+    <div class="result-box" style="display:none;">
+      <h3>💡 Result:</h3>
+      <div class="result-item"><span>Rent:</span> <span id="rentResult"></span></div>
+      <div class="result-item"><span>Accessories:</span> <span id="accessoriesResult"></span></div>
+      <div class="result-item"><span>Emergency:</span> <span id="emergencyResult"></span></div>
+      <div class="result-item"><span>Savings:</span> <span id="savingResult"></span></div>
+    </div>
+  </div>
+</body>
+</html>
